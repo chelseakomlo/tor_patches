@@ -1,0 +1,4 @@
+- make a small tor_alloc C library to link against (not allowed to have
+  rust dependency)
+- panic vs abort (panic across ffi boundary is undef)
+- 

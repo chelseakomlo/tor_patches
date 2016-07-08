@@ -1,0 +1,12 @@
+[package]
+authors = ["The Tor Project"]
+name = "tor_alloc"
+version = "0.0.1"
+
+build = "build.rs"
+
+[lib]
+name = "tor_alloc"
+path = "lib.rs"
+test = false
+
