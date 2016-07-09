@@ -3,3 +3,6 @@
 - panic vs abort (panic across ffi boundary is undef)
 - enum signed vs unsigned
 - structs with bitfields
+- crosscompilation
+- configure detection
+- giving aliased pointers to rust
