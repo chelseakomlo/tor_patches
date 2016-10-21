@@ -307,6 +307,22 @@ And later, you can restore the original function with:
 For more information, see the definitions of this mocking logic in
 `testsupport.h`.
 
+### Testing private functions
+
+If you have a function which is only used within it's module, you can unit test
+this function without having to export it publicly.
+
+For example, if you want to test `void do_something(int 3)`, your header file
+would look like this:
+
+```
+#ifdef TOR_UNIT_TESTS
+
+void do_something(int 3);
+
+#endif
+```
+
 ### Okay but what should my tests actually do?
 
 We talk above about "test coverage" -- making sure that your tests visit
