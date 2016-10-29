@@ -7,6 +7,7 @@ tl;dr:
    - Run `make check-spaces` to catch whitespace errors
    - Document your functions
    - Write unit tests
+   - Run `make test-full` to test against all unit and integration tests.
    - Add a file in `changes` for your branch.
 
 Patch checklist
@@ -26,6 +27,7 @@ Did you remember...
    - To run `make check-docs` to see whether all new options are on
      the manpage?
    - To write unit tests, as possible?
+   - To run `make test-full` to test against all unit and integration tests?
    - To base your code on the appropriate branch?
    - To include a file in the `changes` directory as appropriate?
 
