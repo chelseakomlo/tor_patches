@@ -1738,7 +1738,7 @@ crypto_digest256(char *digest, const char *m, size_t len,
 
 /** Compute a 512-bit digest of <b>len</b> bytes in data stored in <b>m</b>,
  * using the algorithm <b>algorithm</b>.  Write the DIGEST_LEN512-byte result
- * into <b>digest</b>.  Return 0 on success, 1 on failure. */
+ * into <b>digest</b>.  Return 0 on success, -1 on failure. */
 int
 crypto_digest512(char *digest, const char *m, size_t len,
                  digest_algorithm_t algorithm)
@@ -1746,12 +1746,18 @@ crypto_digest512(char *digest, const char *m, size_t len,
   tor_assert(m);
   tor_assert(digest);
   tor_assert(algorithm == DIGEST_SHA512 || algorithm == DIGEST_SHA3_512);
+
+  int is_err;
   if (algorithm == DIGEST_SHA512)
-    return (SHA512((const unsigned char*)m,len,(unsigned char*)digest)
-            == NULL);
+    is_err = SHA512((const unsigned char*)m,len,(unsigned char*)digest)
+            == NULL;
   else
-    return (sha3_512((uint8_t*)digest, DIGEST512_LEN, (const uint8_t*)m, len)
-            == -1);
+    is_err = sha3_512((uint8_t*)digest, DIGEST512_LEN, (const uint8_t*)m, len)
+            == -1;
+  if (is_err == 1)
+    return -1;
+  else
+    return 0;
 }
 
 /** Set the common_digests_t in <b>ds_out</b> to contain every digest on the
