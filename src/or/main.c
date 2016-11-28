@@ -363,6 +363,7 @@ connection_unlink(connection_t *conn)
   if (conn->type == CONN_TYPE_OR) {
     if (!tor_digest_is_zero(TO_OR_CONN(conn)->identity_digest))
       connection_or_remove_from_identity_map(TO_OR_CONN(conn));
+    /*  TODO: wut? */
     /* connection_unlink() can only get called if the connection
      * was already on the closeable list, and it got there by
      * connection_mark_for_close(), which was called from
@@ -484,7 +485,7 @@ connection_check_event(connection_t *conn, struct event *ev)
      */
     bad = ev != NULL;
   } else {
-    /* Everytyhing else should have an underlying socket, or a linked
+    /* Everything else should have an underlying socket, or a linked
      * connection (which is also tracked with a read_event/write_event pair).
      */
     bad = ev == NULL;
@@ -1644,8 +1645,7 @@ static int
 check_expired_networkstatus_callback(time_t now, const or_options_t *options)
 {
   (void)options;
-  /* 1f. Check whether our networkstatus has expired.
-   */
+  /* Check whether our networkstatus has expired. */
   networkstatus_t *ns = networkstatus_get_latest_consensus();
   /*XXXX RD: This value needs to be the same as REASONABLY_LIVE_TIME in
    * networkstatus_get_reasonably_live_consensus(), but that value is way
@@ -1757,7 +1757,7 @@ clean_caches_callback(time_t now, const or_options_t *options)
 
 /**
  * Periodic callback: Clean the cache of failed hidden service lookups
- * frequently frequently.
+ * frequently.
  */
 static int
 rend_cache_failure_clean_callback(time_t now, const or_options_t *options)
