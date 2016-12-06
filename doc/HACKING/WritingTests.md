@@ -509,3 +509,19 @@ targets in `Makefile.am`.
 
 (Adding new kinds of program to chutney will still require hacking the
 code.)
+
+Manual testing
+---------------------------
+With all of this said, it is still important to perform manual testing.
+This will often catch bugs that are overlooked when writing automated tests.
+
+To test tor manually, you can create torrc files within the source directory,
+and run:
+
+`make` (whenever you have changegd a source file)
+`path_to_source/src/or/tor -f torrc`
+
+If you want to start from a fresh state, you will need to remove Tor's state
+file by doing:
+
+`sudo rm /var/lib/tor/state`
