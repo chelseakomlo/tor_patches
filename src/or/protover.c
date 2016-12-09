@@ -26,6 +26,7 @@
 #include "or.h"
 #include "protover.h"
 #include "routerparse.h"
+#include "versions.h"
 
 static const smartlist_t *get_supported_protocol_list(void);
 static int protocol_list_contains(const smartlist_t *protos,
@@ -699,22 +700,16 @@ protover_compute_for_old_tor(const char *version)
     return "";
   } else if (tor_version_as_new_as(version, "0.2.9.1-alpha")) {
     /* 0.2.9.1-alpha HSRend=2 */
-    return "Cons=1-2 Desc=1-2 DirCache=1 HSDir=1 HSIntro=3 HSRend=1-2 "
-      "Link=1-4 LinkAuth=1 "
-      "Microdesc=1-2 Relay=1-2";
+    return HIGHEST_VERSIONS_SUPPORTED;
   } else if (tor_version_as_new_as(version, "0.2.7.5")) {
     /* 0.2.7-stable added Desc=2, Microdesc=2, Cons=2, which indicate
      * ed25519 support.  We'll call them present only in "stable" 027,
      * though. */
-    return "Cons=1-2 Desc=1-2 DirCache=1 HSDir=1 HSIntro=3 HSRend=1 "
-      "Link=1-4 LinkAuth=1 "
-      "Microdesc=1-2 Relay=1-2";
+    return NEXT_HIGHEST_VERSIONS_SUPPORTED;
   } else if (tor_version_as_new_as(version, "0.2.4.19")) {
     /* No currently supported Tor server versions are older than this, or
      * lack these protocols. */
-    return "Cons=1 Desc=1 DirCache=1 HSDir=1 HSIntro=3 HSRend=1 "
-      "Link=1-4 LinkAuth=1 "
-      "Microdesc=1 Relay=1-2";
+    return LOWEST_VERSIONS_SUPPORTED;
   } else {
     /* Cannot infer protocols. */
     return "";
