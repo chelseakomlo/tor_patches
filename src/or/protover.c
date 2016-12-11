@@ -701,18 +701,18 @@ protover_compute_for_old_tor(const char *version)
   }
   if (tor_version_as_new_as(version, "0.2.9.1-alpha")) {
     /* 0.2.9.1-alpha HSRend=2 */
-    return HIGHEST_VERSIONS_SUPPORTED;
+    return VERSIONS_HIGHEST_SUPPORTED;
   }
   if (tor_version_as_new_as(version, "0.2.7.5")) {
     /* 0.2.7-stable added Desc=2, Microdesc=2, Cons=2, which indicate
      * ed25519 support.  We'll call them present only in "stable" 027,
      * though. */
-    return NEXT_HIGHEST_VERSIONS_SUPPORTED;
+    return VERSIONS_NEXT_HIGHEST_SUPPORTED;
   }
   if (tor_version_as_new_as(version, "0.2.4.19")) {
     /* No currently supported Tor server versions are older than this, or
      * lack these protocols. */
-    return LOWEST_VERSIONS_SUPPORTED;
+    return VERSIONS_LOWEST_SUPPORTED;
   }
   /* Cannot infer protocols. */
   return "";
