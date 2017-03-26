@@ -8,8 +8,9 @@ endif
 src_tools_tor_resolve_SOURCES = src/tools/tor-resolve.c
 src_tools_tor_resolve_LDFLAGS =
 src_tools_tor_resolve_LDADD = src/common/libor.a \
-	src/common/libor-ctime.a $(rust_ldadd) \
-	@TOR_LIB_MATH@ @TOR_LIB_WS32@
+	src/common/libor-ctime.a \
+	@TOR_LIB_MATH@ @TOR_LIB_WS32@ \
+	$(rust_ldadd) 
 
 if COVERAGE_ENABLED
 src_tools_tor_cov_resolve_SOURCES = src/tools/tor-resolve.c
@@ -23,11 +24,12 @@ endif
 src_tools_tor_gencert_SOURCES = src/tools/tor-gencert.c
 src_tools_tor_gencert_LDFLAGS = @TOR_LDFLAGS_zlib@ @TOR_LDFLAGS_openssl@
 src_tools_tor_gencert_LDADD = src/common/libor.a src/common/libor-crypto.a \
-    src/common/libor-ctime.a \
-    $(LIBKECCAK_TINY) \
-    $(LIBDONNA) $(rust_ldadd) \
-    @TOR_LIB_MATH@ @TOR_ZLIB_LIBS@ @TOR_OPENSSL_LIBS@ \
-    @TOR_LIB_WS32@ @TOR_LIB_GDI@ @CURVE25519_LIBS@
+	src/common/libor-ctime.a \
+	$(LIBKECCAK_TINY) \
+	$(LIBDONNA) \
+	@TOR_LIB_MATH@ @TOR_ZLIB_LIBS@ @TOR_OPENSSL_LIBS@ \
+	@TOR_LIB_WS32@ @TOR_LIB_GDI@ @CURVE25519_LIBS@ \
+	$(rust_ldadd) 
 
 if COVERAGE_ENABLED
 src_tools_tor_cov_gencert_SOURCES = src/tools/tor-gencert.c
@@ -50,8 +52,8 @@ src_tools_tor_checkkey_LDADD = src/common/libor.a \
     src/common/libor-crypto.a \
     $(LIBKECCAK_TINY) \
     $(LIBDONNA) \
-    $(rust_ldadd) \
     @TOR_LIB_MATH@ @TOR_ZLIB_LIBS@ @TOR_OPENSSL_LIBS@ \
-    @TOR_LIB_WS32@ @TOR_LIB_GDI@ @CURVE25519_LIBS@
+    @TOR_LIB_WS32@ @TOR_LIB_GDI@ @CURVE25519_LIBS@ \
+    $(rust_ldadd)
 
 EXTRA_DIST += src/tools/tor-fw-helper/README

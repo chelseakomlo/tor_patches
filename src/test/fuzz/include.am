@@ -15,11 +15,11 @@ FUZZING_LIBS = \
 	src/common/libor-ctime-testing.a \
 	src/common/libor-event-testing.a \
 	src/trunnel/libor-trunnel-testing.a \
-    $(rust_ldadd) \
 	@TOR_ZLIB_LIBS@ @TOR_LIB_MATH@ \
 	@TOR_LIBEVENT_LIBS@ \
 	@TOR_OPENSSL_LIBS@ @TOR_LIB_WS32@ @TOR_LIB_GDI@ @CURVE25519_LIBS@ \
-	@TOR_SYSTEMD_LIBS@
+	@TOR_SYSTEMD_LIBS@ \
+	$(rust_ldadd)
 
 oss-fuzz-prereqs: \
 	src/or/libtor-testing.a \
