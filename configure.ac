@@ -250,7 +250,11 @@ AC_CHECK_PROG([CARGO], [cargo], [cargo],[/bin/false])
 if test "x$CARGO" = "x"; then
   AC_MSG_WARN([cargo unavailable; rust integration will not be tested.])
 fi
-AM_CONDITIONAL(USERUST, [test "x$RUSTC" != "x" && test "x$CARGO" != "x"])
+AM_CONDITIONAL(USE_RUST, [test "x$RUSTC" != "x" && test "x$CARGO" != "x"])
+
+if test "x$RUSTC" != "x" && test "x$CARGO" != "x"; then
+  AC_DEFINE([HAVE_RUST], 1, [have Rust])
+fi
 
 ifdef([AC_C_FLEXIBLE_ARRAY_MEMBER], [
 AC_C_FLEXIBLE_ARRAY_MEMBER

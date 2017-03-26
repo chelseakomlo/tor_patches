@@ -162,6 +162,7 @@ tor_malloc_(size_t size DMALLOC_PARAMS)
   return result;
 }
 
+#ifndef HAVE_RUST
 /** Allocate a chunk of <b>size</b> bytes of memory, fill the memory with
  * zero bytes, and return a pointer to the result.  Log and terminate
  * the process on error.  (Same as calloc(size,1), but never returns NULL.)
@@ -179,6 +180,7 @@ tor_malloc_zero_(size_t size DMALLOC_PARAMS)
   memset(result, 0, size);
   return result;
 }
+#endif
 
 /* The square root of SIZE_MAX + 1.  If a is less than this, and b is less
  * than this, then a*b is less than SIZE_MAX.  (For example, if size_t is
@@ -203,6 +205,7 @@ size_mul_check(const size_t x, const size_t y)
           x <= SIZE_MAX / y);
 }
 
+#ifndef HAVE_RUST
 /** Allocate a chunk of <b>nmemb</b>*<b>size</b> bytes of memory, fill
  * the memory with zero bytes, and return a pointer to the result.
  * Log and terminate the process on error.  (Same as
@@ -216,6 +219,7 @@ tor_calloc_(size_t nmemb, size_t size DMALLOC_PARAMS)
   tor_assert(size_mul_check(nmemb, size));
   return tor_malloc_zero_((nmemb * size) DMALLOC_FN_ARGS);
 }
+#endif
 
 /** Change the size of the memory block pointed to by <b>ptr</b> to <b>size</b>
  * bytes long; return the new memory block.  On error, log and
@@ -379,6 +383,7 @@ ENABLE_GCC_WARNING(aggregate-return)
  * Math
  * ===== */
 
+#ifndef HAVE_RUST
 /**
  * Returns the natural logarithm of d base e.  We defined this wrapper here so
  * to avoid conflicts with old versions of tor_log(), which were named log().
@@ -388,6 +393,7 @@ tor_mathlog(double d)
 {
   return log(d);
 }
+#endif
 
 /** Return the long integer closest to <b>d</b>. We define this wrapper
  * here so that not all users of math.h need to use the right incantations

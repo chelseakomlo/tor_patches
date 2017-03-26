@@ -25,6 +25,12 @@ else
 TESTING_TOR_BINARY=$(top_builddir)/src/or/tor$(EXEEXT)
 endif
 
+if USE_RUST
+rust_ldadd=src/rust/tor_util/target/release/libtor_util.a
+else
+rust_ldadd=
+endif
+
 include src/include.am
 include doc/include.am
 include contrib/include.am

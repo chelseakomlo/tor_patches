@@ -1,0 +1,7 @@
+# noinst_LIBRARIES += \
+#    src/rust/tor_util/target/release/libtor_util.a
+
+# src_rust_tor_util_target_release_libtor_util_a_SOURCES = src/rust/tor_util/lib.rs
+
+src/rust/tor_util/target/release/libtor_util.a:
+	( cd src/rust/tor_util ; $(CARGO) build --release )
