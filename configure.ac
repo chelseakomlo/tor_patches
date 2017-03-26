@@ -252,7 +252,7 @@ if test "x$CARGO" = "xno"; then
 fi
 AM_CONDITIONAL(USE_RUST, [test "x$RUSTC" != "xno" && test "x$CARGO" != "xno"])
 
-if test "x$RUSTC" != "x" && test "x$CARGO" != "x"; then
+if test "x$RUSTC" != "xno" && test "x$CARGO" != "xno"; then
   AC_DEFINE([HAVE_RUST], 1, [have Rust])
 fi
 
