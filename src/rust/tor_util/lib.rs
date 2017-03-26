@@ -1,6 +1,6 @@
-#![feature(alloc_system)]
 
 extern crate libc;
+extern crate tor_alloc;
 
 #[no_mangle]
 pub extern fn tor_mathlog(d: libc::c_double) -> libc::c_double {
