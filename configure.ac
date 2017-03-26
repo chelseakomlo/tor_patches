@@ -240,17 +240,17 @@ fi
 AM_CONDITIONAL(USEPYTHON, [test "x$PYTHON" != "x"])
 
 AC_ARG_VAR([RUSTC], [path to the rustc binary])
-AC_CHECK_PROG([RUSTC], [rustc], [rustc],[/bin/false])
-if test "x$RUSTC" = "x"; then
+AC_CHECK_PROG([RUSTC], [rustc], [rustc],[no])
+if test "x$RUSTC" = "xno"; then
   AC_MSG_WARN([rustc unavailable; rust integration will not be tested.])
 fi
 
 AC_ARG_VAR([CARGO], [path to the cargo binary])
-AC_CHECK_PROG([CARGO], [cargo], [cargo],[/bin/false])
-if test "x$CARGO" = "x"; then
+AC_CHECK_PROG([CARGO], [cargo], [cargo],[no])
+if test "x$CARGO" = "xno"; then
   AC_MSG_WARN([cargo unavailable; rust integration will not be tested.])
 fi
-AM_CONDITIONAL(USE_RUST, [test "x$RUSTC" != "x" && test "x$CARGO" != "x"])
+AM_CONDITIONAL(USE_RUST, [test "x$RUSTC" != "xno" && test "x$CARGO" != "xno"])
 
 if test "x$RUSTC" != "x" && test "x$CARGO" != "x"; then
   AC_DEFINE([HAVE_RUST], 1, [have Rust])
