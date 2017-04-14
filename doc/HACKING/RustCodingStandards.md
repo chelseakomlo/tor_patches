@@ -1,16 +1,36 @@
-## Coding Standards for Writing Rust in Tor
+## Coding Standards for Writing Rustin Tor
 
-- Panics should kill the current thread
-- Default to not including more crates
-- Drop should get called to clean up resources
 
-TODO: Add automated linting, Rust Clippy is a good option
+### Importing Crates
+
+Default to not including third-party crates.
+
+### Memory management
+
+- Allocate/free API
+
+Rust modules will need to expose allocate/free api methods. This is a pattern
+we already follow in Tor.
+
+- Calling Drop
+
+Drop should get called to clean up resources
 
 ### Defining integration points between Rust and C
 
-TODO: define best practices for Rust/C APIs.
+- FFI api functions should be in their own file
 
-There will be upcoming changes in the future, let's keep following that
-movement here:
+- Do not include logic in your Rust/C API
 
-https://github.com/rust-lang/rust-roadmap/issues/14
+Your Rust module should expose the same functionality via a Rust API. The
+Rust/C FFI should be purely for translation purposes.
+
+- FFI functions should be wrapped with unsafe
+
+### Handling errors
+
+- Panics should kill the current thread
+
+### Linting and coding style
+
+TODO: Add automated linting, Rust Clippy is a good option
