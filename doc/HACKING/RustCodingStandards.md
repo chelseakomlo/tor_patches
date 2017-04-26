@@ -38,6 +38,11 @@ as its C API. The Rust/C FFI should be purely for translation purposes.
 
 - Use rustfmt to format your code
 
-We have a rustfmt.toml file which defines which styles we have defined for Tor.
+We have a rustfmt.toml file which defines a few styles that we want for Tor.
 
-TODO: Add automated linting, Rust Clippy is a good option
+Because rustfmt requires Rust nightly, we haven't included this as a required
+dependency for Tor development. Please install this separately via:
+
+```cargo install rustfmt```
+
+TODO: Add Clippy instructions
