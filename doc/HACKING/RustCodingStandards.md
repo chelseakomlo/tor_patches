@@ -9,7 +9,7 @@ Default to not including third-party crates.
 
 - Allocate/free API
 
-Rust modules will need to expose allocate/free api methods. This is a pattern
+Rust modules will need to expose allocate/free functions. This is a pattern
 we already follow in Tor.
 
 - Calling Drop
@@ -20,10 +20,13 @@ Drop should get called to clean up resources
 
 - FFI api functions should be in their own file
 
-- Do not include logic in your Rust/C API
+FFI functions will use imports not necessary in pure Rust code, so we prefer
+keeping these separate.
 
-Your Rust module should expose the same functionality via a Rust API. The
-Rust/C FFI should be purely for translation purposes.
+- Do not include logic in Rust FFI functions
+
+Your Rust module should expose the same functionality via its Rust API as well
+as its C API. The Rust/C FFI should be purely for translation purposes.
 
 - FFI functions should be wrapped with unsafe
 
