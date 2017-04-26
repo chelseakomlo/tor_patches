@@ -33,4 +33,8 @@ Rust/C FFI should be purely for translation purposes.
 
 ### Linting and coding style
 
+- Use rustfmt to format your code
+
+We have a rustfmt.toml file which defines which styles we have defined for Tor.
+
 TODO: Add automated linting, Rust Clippy is a good option
