@@ -881,4 +881,9 @@ mod test {
         versions = "1-3,500";
         assert_eq!(String::from(versions), ProtoSet::from_str(&versions).unwrap().to_string());
     }
+
+    #[test]
+    fn test_compute_for_old_tor() {
+        assert_eq!(compute_for_old_tor("999.999.999.999"), Ok(""));
+    }
 }

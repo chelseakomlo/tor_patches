@@ -3,6 +3,9 @@
 
 set -e
 
+echo "LIBS=$LIBS"
+echo "RUSTFLAGS=$RUSTFLAGS"
+
 CARGO_TARGET_DIR="${abs_top_builddir:-../../..}/src/rust/target" \
     CARGO_HOME="${abs_top_builddir:-../../..}/src/rust" \
     find "${abs_top_srcdir:-../../..}/src/rust" \

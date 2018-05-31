@@ -1,3 +1,33 @@
+TESTS_RUSTFLAGS= \
+	@TOR_LDFLAGS_zlib@ \
+	@TOR_LDFLAGS_openssl@ \
+	@TOR_LDFLAGS_libevent@ \
+	-L $(abs_top_builddir)/src/or \
+	-L $(abs_top_builddir)/src/common \
+	-L $(abs_top_builddir)/src/ext/keccak-tiny \
+	-L $(abs_top_builddir)/src/ext/ed25519/ref10 \
+	-L $(abs_top_builddir)/src/ext/ed25519/donna \
+	-L $(abs_top_builddir)/src/trunnel \
+	-L $(abs_top_builddir)/src/trace \
+	-l static=tor-testing \
+	-l static=or-crypto-testing \
+	-l static=or-testing \
+	-l static=or-ctime-testing \
+	-l static=or-event-testing \
+	-l static=or-trunnel-testing \
+	-l static=or-trace \
+	-l static=curve25519_donna \
+	-l static=keccak-tiny \
+	-l static=ed25519_ref10 \
+	-l static=ed25519_donna \
+	@TOR_ZLIB_LIBS@ @TOR_LIB_MATH@ @TOR_LIBEVENT_LIBS@ \
+	-l static=crypto \
+	-l static=ssl \
+	@TOR_LIB_WS32@ @TOR_LIB_GDI@ @TOR_LIB_USERENV@ \
+	@CURVE25519_LIBS@ \
+	@TOR_SYSTEMD_LIBS@ @TOR_LZMA_LIBS@ @TOR_ZSTD_LIBS@
+
+
 # When the day comes that Tor requires Automake >= 1.12 change
 # TESTS_ENVIRONMENT to AM_TESTS_ENVIRONMENT because the former is reserved for
 # users while the later is reserved for developers.
@@ -9,7 +39,8 @@ TESTS_ENVIRONMENT = \
 	export builddir="$(builddir)"; \
 	export TESTING_TOR_BINARY="$(TESTING_TOR_BINARY)"; \
 	export CARGO="$(CARGO)"; \
-	export CARGO_ONLINE="$(CARGO_ONLINE)";
+	export CARGO_ONLINE="$(CARGO_ONLINE)"; \
+	export RUSTFLAGS="$(TESTS_RUSTFLAGS)";
 
 TESTSCRIPTS = \
 	src/test/fuzz_static_testcases.sh \
@@ -368,4 +399,5 @@ EXTRA_DIST += \
 	src/test/test_workqueue_socketpair.sh
 
 test-rust:
+	export LIBS="$(LIBS)"; \
 	$(TESTS_ENVIRONMENT) "$(abs_top_srcdir)/src/test/test_rust.sh"
